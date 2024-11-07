@@ -2,11 +2,15 @@ import Item from '../Item/Item';
 import './ItemList.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus, faMinus } from '@fortawesome/free-solid-svg-icons'
-import React from 'react';
+import React, { useContext } from 'react';
 
 import { showError } from '../Utils/showToasts';
+import { ShoppingItemContext } from '../providers/shoppingContext';
 
-function ItemList({shoppingItem,addQuantity,decQuantity}) {
+function ItemList({addQuantity,decQuantity}) {
+
+    const shoppingItem = useContext(ShoppingItemContext);
+
     return(
         <div className='shopping-item-wrapper'>
             {

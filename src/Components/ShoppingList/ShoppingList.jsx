@@ -6,20 +6,14 @@ import './ShoppingList.css';
 import { ToastContainer } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
 import itemReducer from "../Reducers/itemReducer";
-
+import {ShoppingItemContext,ShoppingDispatchContext} from "../providers/shoppingContext";
 
 function ShoppingList(){
     
     const [shoppingItem,dispatch] = useReducer(itemReducer,[]);
-    //this shoppingItem and dispatch is only available to shoppingList  for other component to access this we need to pass it as
-    //prop as we are doing in InputItem and ItemList so we integrate context api along with reducer
+   
 
-    const handleAddItem = (name) => {
-        dispatch({
-            type: 'add_item',
-            itemName: name
-        })
-    }
+    
 
 
     const handleAddQuantity = (itemId) => {
@@ -39,18 +33,20 @@ function ShoppingList(){
 
     return(
         <>
-            <Header/>
-            <ToastContainer/>
-            <div className="shopping-list">
-                <InputItem 
-                    addItem={handleAddItem}
-                />
-                <ItemList
-                    shoppingItem={shoppingItem}
-                    addQuantity={handleAddQuantity}
-                    decQuantity={handleDecQuantity}
-                />
-            </div>
+        <ShoppingItemContext.Provider value={shoppingItem}>
+            <ShoppingDispatchContext.Provider value={dispatch}>
+                <Header/>
+                <ToastContainer/>
+                <div className="shopping-list">
+                    <InputItem 
+                    />
+                    <ItemList
+                        addQuantity={handleAddQuantity}
+                        decQuantity={handleDecQuantity}
+                    />
+                </div>
+            </ShoppingDispatchContext.Provider>
+        </ShoppingItemContext.Provider> 
         </>
     );
 }

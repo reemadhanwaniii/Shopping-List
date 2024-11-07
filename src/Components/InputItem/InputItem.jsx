@@ -2,19 +2,20 @@ import './InputItem.css';
 
 import { showError, showSuccess } from '../Utils/showToasts';
 import { useForm } from "react-hook-form";
-import { useEffect } from 'react';
+import { useContext, useEffect } from 'react';
+import { ShoppingDispatchContext } from '../providers/shoppingContext';
 
-
-function InputItem({addItem}){
+function InputItem(){
 
    
     const { register, handleSubmit, formState: { errors }} = useForm(); 
+    const dispatch = useContext(ShoppingDispatchContext);
 
     const handleSubmission = (data) => {
-        // e.preventDefault();
-        // addItem(itemName);
-        // setItemName("");
-        addItem(data.item)
+        dispatch({
+            type: 'add_item',
+            itemName: data.item
+        })
         showSuccess("Successfully added Item");
     }
 
@@ -26,6 +27,8 @@ function InputItem({addItem}){
             showError("Item cannot be less than 3 length");
         }
     },[errors.item && errors.item.type])
+
+
 
     return(
         <>
