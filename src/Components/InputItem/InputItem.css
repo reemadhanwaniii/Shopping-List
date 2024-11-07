@@ -1,0 +1,30 @@
+.item-input-wrapper{
+    width: 400px;
+    display: flex;
+    gap: 1rem;
+}
+
+.item-input{
+    width: 100%;
+    padding: 1rem;
+    border: none;
+    border-bottom: 1px solid gray;
+}
+
+.item-input:focus{
+    outline: 0;
+}
+
+.add-item-btn {
+    width: 100px;
+    height: 50px;
+    background-color: var(--light-purple);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    box-shadow: 2px 2px gray;
+}
+
+.add-item-btn:hover {
+    box-shadow: none;
+}
