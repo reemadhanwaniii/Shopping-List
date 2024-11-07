@@ -24,3 +24,7 @@
     background-color: lightgray;
     color: white;
 }
+
+.change-quantity:hover{
+    color: black;
+}

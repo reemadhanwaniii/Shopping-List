@@ -1,5 +1,7 @@
 import './InputItem.css';
 
+import { showSuccess } from '../Utils/showToasts';
+
 function InputItem(){
     return(
         <>
@@ -11,6 +13,7 @@ function InputItem(){
                 />
                 <button 
                     className='add-item-btn'
+                    onClick={() => showSuccess("Successfully added Item")}
                 >
                     Add
                 </button>
