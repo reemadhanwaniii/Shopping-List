@@ -11,7 +11,8 @@ import itemReducer from "../Reducers/itemReducer";
 function ShoppingList(){
     
     const [shoppingItem,dispatch] = useReducer(itemReducer,[]);
-  
+    //this shoppingItem and dispatch is only available to shoppingList  for other component to access this we need to pass it as
+    //prop as we are doing in InputItem and ItemList so we integrate context api along with reducer
 
     const handleAddItem = (name) => {
         dispatch({
