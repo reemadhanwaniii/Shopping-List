@@ -13,24 +13,6 @@ function ShoppingList(){
     const [shoppingItem,dispatch] = useReducer(itemReducer,[]);
    
 
-    
-
-
-    const handleAddQuantity = (itemId) => {
-      dispatch({
-        type: 'increment_item',
-        itemId: itemId
-      })
-    }
-
-    const handleDecQuantity = (itemId) => {
-        dispatch({
-            type: "decrement_item",
-            itemId: itemId
-        })
-      
-    }
-
     return(
         <>
         <ShoppingItemContext.Provider value={shoppingItem}>
@@ -38,12 +20,8 @@ function ShoppingList(){
                 <Header/>
                 <ToastContainer/>
                 <div className="shopping-list">
-                    <InputItem 
-                    />
-                    <ItemList
-                        addQuantity={handleAddQuantity}
-                        decQuantity={handleDecQuantity}
-                    />
+                    <InputItem />
+                    <ItemList/>
                 </div>
             </ShoppingDispatchContext.Provider>
         </ShoppingItemContext.Provider> 
