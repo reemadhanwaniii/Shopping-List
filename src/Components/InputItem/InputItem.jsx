@@ -1,7 +1,8 @@
 import './InputItem.css';
 
-import { showSuccess } from '../Utils/showToasts';
+import { showError, showSuccess } from '../Utils/showToasts';
 import { useForm } from "react-hook-form";
+import { useEffect } from 'react';
 
 
 function InputItem({addItem}){
@@ -16,6 +17,15 @@ function InputItem({addItem}){
         addItem(data.item)
         showSuccess("Successfully added Item");
     }
+
+    useEffect(()=>{
+        if(errors.item && errors.item.type === 'required'){
+            showError("Item cannot be empty");
+        }
+        if(errors.item && errors.item.type === 'minLength'){
+            showError("Item cannot be less than 3 length");
+        }
+    },[errors.item && errors.item.type])
 
     return(
         <>
@@ -34,10 +44,10 @@ function InputItem({addItem}){
                         Add
                     </button>
                </form>
-               <div>
+               {/* <div>
                         {errors.item && errors.item.type === "required" && <p>Item is missing</p>}
                         {errors.item && errors.item.type === "minLength" && <p>Item length cannot be less than 3</p>}
-                </div>
+                </div> */}
             </div>
         </>
     );
