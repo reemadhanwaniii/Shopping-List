@@ -2,3 +2,25 @@
     min-width: 100%;
     max-width: 500px;
 }
+
+.items-list {
+    display: flex;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.change-quantity {
+    padding: 0.5rem;
+    border-radius: 100%;
+    font-size: small;
+}
+
+.plus {
+    background-color: var(--blue);
+    color: white;
+}
+
+.minus {
+    background-color: lightgray;
+    color: white;
+}
