@@ -1,36 +1,39 @@
-import { useState } from "react";
+import { useReducer  } from "react";
 import Header from "../Header/Header";
 import InputItem from "../InputItem/InputItem";
 import ItemList from "../ItemList/ItemList";
 import './ShoppingList.css';
 import { ToastContainer } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
-import { v4 as uuidv4 } from 'uuid';
+import itemReducer from "../Reducers/itemReducer";
 
 
 function ShoppingList(){
-    const [shoppingItems,setShoppingItems] = useState([]);
+    
+    const [shoppingItem,dispatch] = useReducer(itemReducer,[]);
+  
 
-    const handleAddItem = (itemName) => {
-        setShoppingItems([...shoppingItems,{id:uuidv4(),name: itemName,quantity: 1}])
+    const handleAddItem = (name) => {
+        dispatch({
+            type: 'add_item',
+            itemName: name
+        })
     }
 
 
     const handleAddQuantity = (itemId) => {
-        const newShoppingItems = shoppingItems.map((item)=>{
-            if(item.id === itemId) item.quantity++;
-            return item;
-        });
-        setShoppingItems(newShoppingItems);
+      dispatch({
+        type: 'increment_item',
+        itemId: itemId
+      })
     }
 
     const handleDecQuantity = (itemId) => {
-        let newShoppingItems = shoppingItems.map((item)=>{
-            if(item.id === itemId && item.quantity > 0) item.quantity--;
-            return item;
-        });
-        newShoppingItems = newShoppingItems.filter(item => item.quantity > 0)
-        setShoppingItems(newShoppingItems);
+        dispatch({
+            type: "decrement_item",
+            itemId: itemId
+        })
+      
     }
 
     return(
@@ -42,7 +45,7 @@ function ShoppingList(){
                     addItem={handleAddItem}
                 />
                 <ItemList
-                    shoppingItem={shoppingItems}
+                    shoppingItem={shoppingItem}
                     addQuantity={handleAddQuantity}
                     decQuantity={handleDecQuantity}
                 />
